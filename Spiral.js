@@ -1,4 +1,5 @@
 process.stdin.resume();
+process.stdin.setEncoding('utf8');
 
 var input_stdin = "";
 
@@ -10,7 +11,13 @@ process.stdin.on('data', function (data)
 
 function readLine()
 {
-    return input_stdin;
+    if (isNaN(parseInt(input_stdin)))
+    {
+        console.log("Sorry, that doesn't seem to be an integer.");
+        process.exit();
+    } else {
+        return parseInt(input_stdin);
+    }
 }
 
 function generate(n) // generate an array that contains a spiral up to the given number
@@ -69,22 +76,23 @@ function print(arr, n = false)  // pretty printing
     // if given, convert n to an int, else, find n in matrix.
     n = n ? n >> 0 :  Math.max.apply(null, arr.map(function(row){ return Math.max.apply(Math, row); }));
 
-    let digits_n = n.toString().length;
-
     for(let row of arr)
     {
         for(let num of row)
         {
             if (typeof num === 'undefined')
             {
-                process.stdout.write(" ".repeat(digits_n + 1));  // plus one for the space we add after each num
+                if((n/10 >> 0) >= 1)        {process.stdout.write("     ");}  // spacing
+                else if((n/100 >> 0) >= 1)  {process.stdout.write("    ");}
+                else if((n/1000 >> 0) >= 1) {process.stdout.write("   ");}
+                else {process.stdout.write("    ");}
+                process.stdout.write(" ");
                 continue;
             }
+            if(num < 10)        {process.stdout.write("   ");}  // spacing
+            else if(num < 100)  {process.stdout.write("  ");}
+            else if(num < 1000) {process.stdout.write(" ");}
 
-            let digits_num = num.toString().length,
-                diff = digits_n - digits_num;
-
-            process.stdout.write(" ".repeat(diff));
             process.stdout.write(num.toString() + " ");
         }
         console.log()
@@ -93,7 +101,7 @@ function print(arr, n = false)  // pretty printing
 
 function main()
 {
-    let n = parseInt(readLine());  // parse input
+    let n = readLine();  // get input
 
     let arr = generate(n);
 
