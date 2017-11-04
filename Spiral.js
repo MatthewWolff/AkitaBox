@@ -26,7 +26,6 @@ function generate(n) // generate an array that contains a spiral up to the given
     // Generate Square
     for (let steps = 1; steps <= size && !is_done; steps++)
     {
-
         if (steps % 2 !== 0)
         {
             for (let i = 0; i < steps && !is_done; i++)  // go right
