@@ -11,12 +11,17 @@ process.stdin.on('data', function (data)
 
 function readLine()
 {
-    if (isNaN(parseInt(input_stdin)))
+    let val = parseInt(input_stdin);
+    if (isNaN(val))
     {
         console.log("Sorry, that doesn't seem to be an integer.");
-        process.exit();
+        process.exit(1);
+    } else if(val < 0)
+    {
+        console.log("Sorry, only positive integers are allowed.");
+        process.exit(1);
     } else {
-        return parseInt(input_stdin);
+        return val;
     }
 }
 
@@ -71,7 +76,7 @@ function generate(n)  // generate an array that contains a spiral up to the give
     return arr;
 }
 
-function print(arr, n = false)  // pretty printing for n < 10,000 
+function print(arr, n = false)  // pretty printing for n < 10,000
 {
     // if given, convert n to an int, else, find n in matrix.
     n = n ? n >> 0 :  Math.max.apply(null, arr.map(function(row){ return Math.max.apply(Math, row); }));
@@ -108,5 +113,5 @@ function main()
     print(arr);
     // print(arr, n); // provide n-value for better performance
 
-    process.exit();
+    process.exit(0);
 }
