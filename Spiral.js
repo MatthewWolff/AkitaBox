@@ -76,10 +76,16 @@ function generate(n)  // generate an array that contains a spiral up to the give
     return arr;
 }
 
-function print(arr, n = false)  // pretty printing for n < 10,000
+function digits(number)  // helper method
+{
+    return number.toString().split("").length;
+}
+function print(arr, n = false)  // pretty printing
 {
     // if given, convert n to an int, else, find n in matrix.
-    n = n ? n >> 0 :  Math.max.apply(null, arr.map(function(row){ return Math.max.apply(Math, row); }));
+    n = n ? n >> 0 :  Math.max.apply(Math,[].concat(... arr).filter(num => true));
+
+    let dig_n = digits(n);
 
     for(let row of arr)
     {
@@ -87,15 +93,12 @@ function print(arr, n = false)  // pretty printing for n < 10,000
         {
             if (typeof num === 'undefined')  // print spacing to match largest int (n)
             {
-                process.stdout.write("     ");// change a space to a dot to visualize spacing
+                process.stdout.write(" ".repeat(dig_n + 1)); // + 1 for the space after a number
                 continue;
             }
-            // hardcoded tears
-            if(num < 10)        {process.stdout.write("   ");}  // spacing
-            else if(num < 100)  {process.stdout.write("  ");}
-            else if(num < 1000) {process.stdout.write(" ");}
-            else { /* add higher-value printing here if needed */}
 
+            let dig = digits(num);
+            process.stdout.write(" ".repeat(dig_n - dig)); // compensation spacing for smaller nums
             process.stdout.write(num.toString() + " ");
         }
         console.log()
