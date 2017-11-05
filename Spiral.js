@@ -87,16 +87,14 @@ function print(arr, n = false)  // pretty printing for n < 10,000
         {
             if (typeof num === 'undefined')  // print spacing to match largest int (n)
             {
-                if((n/10 >> 0) >= 1)        {process.stdout.write("     ");}  // spacing
-                else if((n/100 >> 0) >= 1)  {process.stdout.write("    ");}
-                else if((n/1000 >> 0) >= 1) {process.stdout.write("   ");}
-                else {process.stdout.write("    ");}  // hardcoded tears
-                process.stdout.write(" ");  // change this space to a dot to visualize spacing
+                process.stdout.write("     ");// change a space to a dot to visualize spacing
                 continue;
             }
+            // hardcoded tears
             if(num < 10)        {process.stdout.write("   ");}  // spacing
             else if(num < 100)  {process.stdout.write("  ");}
             else if(num < 1000) {process.stdout.write(" ");}
+            else { /* add higher-value printing here if needed */}
 
             process.stdout.write(num.toString() + " ");
         }
