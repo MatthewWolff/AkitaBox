@@ -3,6 +3,7 @@ process.stdin.setEncoding('utf8');
 
 var input_stdin = "";
 
+console.log("Hi, please input the integer you'd like to spiral to:");
 process.stdin.on('data', function (data)
 {
     input_stdin = data.split("\n");
