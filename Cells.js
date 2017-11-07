@@ -2,13 +2,13 @@ process.stdin.setEncoding('utf-8');
 var input_stdin_array = [];
 var length_in = -1;
 
-console.log("Hello, please input a square matrix of cells:\n");
+console.log("Hello, please input a square matrix of cells:");
 process.stdin.on('readable',function()
 {
     var vText = process.stdin.read();
     if(input_stdin_array.length === 0) length_in = vText.split("").length - 1;
     if (vText != null) input_stdin_array.push(vText.replace("\n",""));
-    if(--length_in === 0) 
+    if(--length_in === 0)
         main();
 });
 
@@ -32,7 +32,7 @@ function get_board()
     // minimal input validation
     if([].concat(... board).every(num => num === 0 || num === 1) && valid)
         {return board;}
-    //otherwise
+    //otherwise...
     console.log("Sorry, that board is invalid.");
     process.exit(1);
 }
@@ -86,6 +86,7 @@ function time_lapse(board)
 }
 function print(board)
 {
+    console.log("Next Generation:");
     for(let row of board)
     {
         for(let num of row)
